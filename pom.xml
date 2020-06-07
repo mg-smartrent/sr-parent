@@ -12,7 +12,7 @@
 
     <groupId>com.mg.platform</groupId>
     <artifactId>sr-parent</artifactId>
-    <version>1.26-SNAPSHOT</version>
+    <version>1.27-SNAPSHOT</version>
     <description>This is SmartRent parent pom.</description>
     <packaging>pom</packaging>
 
