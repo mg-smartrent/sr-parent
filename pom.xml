@@ -12,7 +12,7 @@
 
     <groupId>com.mg.platform</groupId>
     <artifactId>sr-parent</artifactId>
-    <version>1.29-SNAPSHOT</version>
+    <version>1.29</version>
     <description>This is SmartRent parent pom.</description>
     <packaging>pom</packaging>
 
@@ -59,7 +59,7 @@
         <connection>scm:git:https://github.com/mg-smartrent/sr-parent.git</connection>
         <developerConnection>scm:git:https://github.com/mg-smartrent/sr-parent.git
         </developerConnection>
-        <tag>HEAD</tag>
+        <tag>sr-parent-1.29</tag>
     </scm>
 
     <dependencies>
