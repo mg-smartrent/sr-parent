@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -7,7 +8,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.0.RELEASE</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.mg.platform</groupId>
@@ -37,13 +38,10 @@
         <!--dependencies-->
         <groovy.all.version>2.1.5</groovy.all.version>
         <spock.core.version>0.7-groovy-2.0</spock.core.version>
-        <jackson.version>2.10.1</jackson.version>
-        <javax.version>2.0.1.Final</javax.version>
-        <lombok.version>1.18.6</lombok.version>
         <graphql.sprq.version>0.0.4</graphql.sprq.version>
         <graphql.version>5.0.2</graphql.version>
         <swagger.version>2.9.2</swagger.version>
-        <spring.eureka.version>2.2.3.RELEASE</spring.eureka.version>
+        <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
     </properties>
 
     <distributionManagement>
@@ -62,46 +60,80 @@
         <tag>HEAD</tag>
     </scm>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <version>${spring.eureka.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
 
         <!--Bean enrichment & validation-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
 
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>${javax.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
 
         <!--Swagger {-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger.version}</version>
         </dependency>
         <!--Swagger }-->
 
@@ -171,6 +203,11 @@
                 <version>${maven.compiler.plugin.version}</version>
             </plugin>
 
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
             <!-- Testing { -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -181,6 +218,7 @@
                     <includes>
                         <include>**/*Test.java</include>
                         <include>**/*Spec.java</include>
+                        <include>**/*Setup.java</include>
                     </includes>
                 </configuration>
             </plugin>
@@ -200,6 +238,7 @@
                             <includes>
                                 <include>**/*ITest.java</include>
                                 <include>**/*ISpec.java</include>
+                                <include>**/*ISetup.java</include>
                             </includes>
                             <skipTests>${skip.integration.tests}</skipTests>
                         </configuration>
