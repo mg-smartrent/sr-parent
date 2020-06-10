@@ -181,6 +181,9 @@
                         <include>**/*Test.java</include>
                         <include>**/*Spec.java</include>
                         <include>**/*Setup.java</include>
+                        <include>**/*Test.groovy</include>
+                        <include>**/*Spec.groovy</include>
+                        <include>**/*Setup.groovy</include>
                     </includes>
                 </configuration>
             </plugin>
@@ -200,6 +203,9 @@
                                 <include>**/*ITest.java</include>
                                 <include>**/*ISpec.java</include>
                                 <include>**/*ISetup.java</include>
+                                <include>**/*ITest.groovy</include>
+                                <include>**/*ISpec.groovy</include>
+                                <include>**/*ISetup.groovy</include>
                             </includes>
                             <skipTests>${skip.integration.tests}</skipTests>
                         </configuration>
@@ -253,6 +259,7 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>**/Application</exclude>
+                                        <exclude>**/generated/**/*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
